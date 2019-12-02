@@ -1,0 +1,87 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarUsuario( input.value )" type="text" class="form-control" placeholder="Buscar usuario por apellido...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+
+    <div class="col-sm-12">
+
+        <div class="alert alert-warning text-center">
+            <strong>Cargando pacientes</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button [routerLink]="['/nuevopaciente']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"></i> 
+                        Crear Paciente
+                    </button>
+                </div>
+                <h3 class="card-title mt-2">Usuarios registrados ( <small>{{ totalRegistros }}</small> )</h3>
+                <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="cell-name">Imagen</th>
+                                <th class="cell-email">Correo</th>
+                                <th class="cell-name">Nombre</th>
+                                <th class="cell-name">Apellicos</th>
+                                <th class="cell-email">Teléfono</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <!-- <div *cdkVirtualFor="let item of items" class="example-item">{{item}}</div> -->
+
+                            <tr *ngFor="let usuario of usuarios" class="pointer" [routerLink]="['/paciente', usuario._id]">
+                                <td class="w-img">
+                                    <img (click)="mostrarModal( usuario._id )" [src]="usuario.img | imagen" class="img-50 img-circle pointer">
+                                </td>
+                                <td class="cell-email">
+                                    {{ usuario.email }}
+                                </td>
+                                <td class="cell-row">{{ usuario.nombre }}</td>
+                                <td class="cell-row"> {{ usuario.apellidos }} </td>
+                                <td class="cell-email"> {{ usuario.telefono }} </td>
+                                <td>
+                                    <button [routerLink]="['/paciente', usuario._id]" class="btn btn-outline-primary">
+                                    <i class="fa fa-vcard-o"></i>
+                                </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </cdk-virtual-scroll-viewport>
+
+                <!-- <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                  Anteriores
+                </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                    Siguientes
+                </button> -->
+
+            </div>
+        </div>
+    </div>
+</div>

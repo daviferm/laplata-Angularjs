@@ -1,0 +1,28 @@
+<div class="contenido">
+
+    <div class="mes">
+        <div class="nombre-mes">
+            <p> {{ mesActual }} de {{ yearActual }} </p>
+        </div>
+        <div class="mes-ant" (click)=restarMes()>
+            <i class="fa fa-angle-double-left"></i>
+        </div>
+        <div class="mes-post" (click)=sumarMes()>
+            <i class="fa fa-angle-double-right"></i>
+        </div>
+    </div>
+    <div class="mini-calendar" [ngClass]="{'calendat-short': diasMes.length <= 35, 'calendar-long': diasMes.length > 35}">
+        <header>
+            <div class="dia-semana" *ngFor="let dia of diasSemana">
+                <p> {{ dia }} </p>
+            </div>
+        </header>
+        <div class="celdas" #calendar>
+            <div class="celda" *ngFor="let dia of diasMes">
+                <div [ngClass]="{'dia-actual': (dia | date) == -1}" [id]="dia|id">
+                    <p [ngClass]="{'no-mes': (dia | date:1) !== numeroMes }" (click)="verSemana(dia)"> {{ dia | date:0 }} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

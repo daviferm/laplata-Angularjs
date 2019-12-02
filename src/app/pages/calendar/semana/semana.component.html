@@ -1,0 +1,62 @@
+<div class="content-calendar">
+    <div class="calendar">
+        <div class="header">
+            <div class="horas">
+            </div>
+            <div class="semana" #celdaSemana>
+                <div class="dia-semana" *ngFor="let dia of diasSemana" [id]="dia|id">
+                    <div>
+                        <p> {{ semana[ dia | date:2] }} </p>
+                    </div>
+                    <div class="number-dia pointer" [ngClass]="{'dia-selected': ( dia | date:0 ) == diaSeleccionado, 'dia-actual': (dia | date) == -1}" (click)="mostrarDia(dia)">
+                        <p> {{ dia | date:0 }} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="fin-semana">
+                <div class="dia-fin-semana" *ngFor="let dia of finSemana">
+                    <div>
+                        <p class="nom-festivo"> {{ semana[ dia | date:2 ] }} </p>
+                    </div>
+                    <div class="number-dia pointer" [ngClass]="{'dia-selected': ( dia | date:0 ) == diaSeleccionado, 'dia-actual': (dia | date) == -1}" (click)="mostrarDia(dia)">
+                        <p> {{ dia | date:0 }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="colum-dia">
+            <div class="columna-horas">
+                <div class="horas" *ngFor="let hora of horasDia">
+                    <div>
+                        <p> {{ hora }} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="dias" #dias>
+                <div class="columna-celdas" *ngFor="let dia of diasSemana" [id]="dia|id">
+                    <div class="celdas" [id]="dia | id:i" *ngFor="let celda of horasDia; let i = index" (click)="nuevaCita($event, dia, celda)">
+                    </div>
+                </div>
+            </div>
+            <div class="dias-fin-semana">
+                <div class="columna-fin-semana" *ngFor="let dia of finSemana">
+                    <div class="celdas-fin-semana" *ngFor="let celda of horasDia; let i = index">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn spinner-datos" *ngIf="cargando">
+
+    <div class="col-sm-12">
+
+        <div class="alert text-center">
+            <strong>Cargando datos</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>

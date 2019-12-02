@@ -1,0 +1,52 @@
+<div *ngIf="spinner" class="spinner"></div>
+
+<div class="card-user">
+    <div class="jumbotron animated fadeIn" *ngIf="paciente">
+        <h2 class="text-center">Perfil de Usuario</h2>
+        <div class="media">
+            <img [src]="paciente.img | imagen" class="mr-3 w-img">
+            <div class="media-body personales">
+                <p class="mt-0"> <strong class="prop">Nombre:</strong> {{ paciente.nombre }} </p>
+                <p class="mt-0"> <strong class="prop">Apellicos:</strong> {{ paciente.apellidos }} </p>
+                <p class="mt-0"> <strong class="prop">Email:</strong> {{ paciente.email }} </p>
+            </div>
+        </div>
+        <hr class="my-4">
+        <p class="mt-0"> <strong class="prop">Fehca de Nacimiento:</strong> {{ paciente.nacimiento | fecha }} </p>
+        <p class="mt-0"> <strong class="prop">Género:</strong> {{ paciente.genero }} </p>
+        <p class="mt-0"> <strong class="prop">Dirección:</strong> {{ paciente.direccion }} </p>
+        <p class="mt-0"> <strong class="prop">Ciudad:</strong> {{ paciente.ciudad }} </p>
+        <p class="mt-0"> <strong class="prop">Provincia:</strong> {{ paciente.provincia }} </p>
+        <p class="mt-0"> <strong class="prop">Código Postal:</strong> {{ paciente.codigoPostal }} </p>
+        <p class="mt-0"> <strong class="prop">Antiguedad:</strong> {{ paciente.antiguedad }} </p>
+        <p class="mt-0"> <strong class="prop">Observaciones:</strong> {{ paciente.observaciones }} </p>
+        <hr class="my-4">
+        <button type="button" class="btn btn-outline-info" (click)="actualizarUsuario()">Editar</button>
+        <button type="button" class="btn btn-outline-danger ml-4" (click)="borrarUsuario()">Eliminar</button>
+    </div>
+    <div class="jumbotron animated fadeIn" *ngIf="paciente">
+        <h2 class="text-center"> <span class="badge-purple"></span> Historial de citas</h2>
+        <hr class="my-4">
+        <div *ngIf="citasDB">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="cell-name">Dia</th>
+                        <th class="cell-name">Duración</th>
+                        <th class="cell-name">Fisioterapeuta</th>
+                        <th class="cell-name"></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let cita of citasDB">
+                    <tr>
+                        <td class="cell-row"> {{ cita.dia }} </td>
+                        <td class="cell-row"> {{ cita.inicio }}-{{ cita.final }} </td>
+                        <td> <span class="badge badge-info span-medico">{{ cita.medicoId.nombre }}</span> </td>
+                        <td class="cell-row" *ngIf="cita.incidencia"> <span class="badge badge-danger span-medico"> {{ cita.incidencia }} </span> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<app-edit-usuario *ngIf="modalEdit" [usuario]="usuarioDB" (cerrarmodal)="cerrarModal($event)" (actualizar)="actualizarVista( $event )"></app-edit-usuario>

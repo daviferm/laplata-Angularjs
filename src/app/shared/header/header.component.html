@@ -1,0 +1,113 @@
+<!-- ============================================================== -->
+<!-- Topbar header - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<header class="topbar">
+    <nav class="navbar top-navbar navbar-expand-md navbar-light">
+        <!-- ============================================================== -->
+        <!-- Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img id="icon-calendar" src="assets/images/calendar.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon -->
+                            <img id="icon-calendar" src="assets/images/calendar.png" alt="homepage" class="light-logo" />
+                        </b>
+                <!--End Logo icon -->
+                <!-- Logo text --><span id="inoco-text">Calendario
+                         <!-- dark Logo text -->
+                         <!-- <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" /> -->
+                         <!-- Light Logo text -->    
+                         <!-- <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /> -->
+                        </span> </a>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-collapse">
+            <!-- ============================================================== -->
+            <!-- toggle and nav items -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav mr-auto">
+                <!-- This is  -->
+                <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                <li class="nav-item hidden-sm-down"></li>
+            </ul>
+            <!-- ============================================================== -->
+            <!-- User profile and search -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav my-lg-0">
+                <!-- ============================================================== -->
+                <!-- Search -->
+                <!-- ============================================================== -->
+                <li class="nav-item hidden-xs-down">
+                    <a class="nav-link  waves-effect waves-dark">
+                        <strong> {{ hours }} : {{ minutes }} </strong>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a #whatsapp class="nav-link dropdown-toggle waves-effect waves-dark" routerLink="/whatsapp">
+                        <i class="fa fa-whatsapp mt-1" [ngClass]="{'enviado': recordatorio}" style="font-size: 1.6em"></i>
+                        <div class="notify"> <span *ngIf="!whatsappService.whatsappSend" class="heartbit"></span> <span *ngIf="!whatsappService.whatsappSend" class="point"></span> </div>
+
+                    </a>
+                </li>
+
+                <!-- ============================================================== -->
+                <!-- Messages -->
+                <!-- ============================================================== -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-wifi"></i>
+                        <div class="notify"> <span *ngIf="sinConexion" class="heartbit"></span> <span *ngIf="sinConexion" class="point"></span> </div>
+                    </a>
+                    <div *ngIf="sinConexion" class="dropdown-menu mailbox dropdown-menu-right animated fadeIn" aria-labelledby="2">
+                        <ul>
+                            <li>
+                                <div class="drop-title">Fallo de conexión.</div>
+                            </li>
+
+                            <li>
+                                <a class="nav-link text-center" href="javascript:void(0);"> <strong>No hay acceso a la base de datos</strong> <i class="fa fa-angle-right"></i> </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- ============================================================== -->
+                <!-- End Messages -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Profile -->
+                <!-- ============================================================== -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img [src]="empleadoService.empleado.img | imagen:'medico'" alt="user" class="profile-pic" /></a>
+                    <div class="dropdown-menu dropdown-menu-right animated fadeIn">
+                        <ul class="dropdown-user">
+                            <li>
+                                <div class="dw-user-box" align="center">
+                                    <div class="u-img"><img [src]="empleado.img | imagen:'medico'" alt="user"></div>
+                                    <div class="u-text">
+                                        <h4> {{ empleado.nombre }} </h4>
+                                        <p class="text-muted"> {{ empleado.email }} </p><a (click)="verPerfil()" class="btn btn-rounded btn-danger btn-sm pointer">Ver perfil</a></div>
+                                </div>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a (click)="verPerfil()" class="pointer"><i class="ti-user m-1"></i> Mi perfil</a></li>
+                            <li><a routerLink="/medicos"><i class="icon-people m-1 pointer"></i>Empleados</a></li>
+                            <li><a routerLink="/perfil/nuevo"><i class="mdi mdi-account-plus m-1 pointer"></i> Crear empleado</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a routerLink="/ajustes"><i class="ti-settings m-1 pointer"></i> Ajustes</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a (click)="empleadoService.logout()" class="pointer"><i class="fa fa-power-off m-1"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- ============================================================== -->
+<!-- End Topbar header -->
+<!-- ============================================================== -->

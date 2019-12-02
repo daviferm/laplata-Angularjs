@@ -1,0 +1,40 @@
+<div class="navbar">
+    <div class="btn-hoy">
+        <button type="button" (click)="mostrarHoy()" class="btn btn-outline-primary btn-sm">HOY</button>
+    </div>
+    <div class="nav-fecha">
+        <div class="btn-direction">
+            <div class="btn-lefth" (click)="cambiarVista(-1)">
+                <i class="icon-arrow-left"></i>
+            </div>
+            <div class="btn-rigth" (click)="cambiarVista(+1)">
+                <i class="icon-arrow-right"></i>
+            </div>
+        </div>
+
+        <div class="fech">
+            <span *ngIf="pageActive === 'dia'">{{ diaSeleccionado }} de</span> {{ getMes }} de {{ getYear }}
+        </div>
+    </div>
+
+    <div class="btn-group botones" role="group" aria-label="Basic example" #botones>
+        <button #mes type="button" (click)="cambiarActive('mes')" class="btn btn-outline-secondary">Mes</button>
+        <button #semana type="button" (click)="cambiarActive('semana')" class="btn btn-outline-secondary">Semana</button>
+        <button #dia type="button" (click)="cambiarActive('dia')" class="btn btn-outline-secondary">Dia</button>
+    </div>
+</div>
+<div [ngSwitch]="pageActive">
+
+    <div *ngSwitchCase="'semana'" [@openClose]="isOpen" class="calendario">
+        <app-semana [diasSemana]="diasSemana" [diaSeleccionado]="diaSeleccionado" (verDia)="mostrarDia($event)"></app-semana>
+    </div>
+    <div *ngSwitchCase="'mes'" class="calendario">
+        <app-mes (diaSeleccionado)="mostrarDia($event)"></app-mes>
+    </div>
+    <div *ngSwitchCase="'dia'" class="calendario">
+        <app-dia [diaSeleccionado]="fecha"></app-dia>
+    </div>
+    <div *ngSwitchDefault class="calendario">
+        <app-semana [diasSemana]="diasSemana" [diaSeleccionado]="diaSeleccionado" (verDia)="mostrarDia($event)"></app-semana>
+    </div>
+</div>

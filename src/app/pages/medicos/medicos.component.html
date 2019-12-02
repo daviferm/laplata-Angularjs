@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button [routerLink]="['/perfil','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"></i> 
+                        Crear Empleado
+                    </button>
+                </div>
+
+                <h3 class="card-title mt-2">Empleados registrados ( <small> {{ _medicoService.totalMedicos }} </small> )</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="cell-name">Foto</th>
+                            <th class="cell-name">Nombre</th>
+                            <th class="cell-email">Teléfono</th>
+                            <th class="cell-name">Color</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let medico of medicos">
+                            <td class="w-img">
+                                <img [src]="medico.img | imagen:'medico'" class="img-50 img-circle">
+                            </td>
+                            <td class="cell-row">
+                                <p class="mt-2">{{ medico.nombre }}</p>
+                            </td>
+                            <td class="cell-row cell-email">
+                                {{ medico.telefono }}
+                            </td>
+                            <td>
+                                <div [ngStyle]="{'background': medico.color}" class="square"></div>
+                            </td>
+                            <td>
+                                <button [routerLink]="['/perfil', medico._id ]" class="btn btn-primary btn-user">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+
+                            </td>
+                            <td>
+                                <button *ngIf="medico._id !== usuarioLogin._id" (click)="borrarMedico( medico )" class="btn btn-danger btn-user">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

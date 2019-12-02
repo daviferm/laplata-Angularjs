@@ -1,0 +1,179 @@
+<!-- Button trigger modal -->
+<!-- cdkDrag -->
+<!-- Modal -->
+<div class="fondo-negro animated fadeIn" [ngClass]="modalCitaService.oculto" (click)="cerrarVentana( $event )">
+
+    <div *ngIf="dispositivo==='Descktop'" class="modal-mobile" style="display: block;" tabindex="-1" role="dialog" cdkDrag>
+        <div class="modal-dialog mt-2" role="document">
+            <div #modal class="modal-content">
+                <div class="modal-header" [ngClass]="{'bg-megna': !actualizarCita, 'bg-inverse text-white': actualizarCita}">
+                    <h5 class="modal-title" *ngIf="!actualizarCita" id="exampleModalCenterTitle">Nueva Cita</h5>
+                    <h5 class="text-white" *ngIf="actualizarCita">Actualizar Cita</h5>
+                    <button (click)="cerrarModal()" type="button" class="close pointer text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="guardarCita()">
+                        <div class="form-group col-md-12 control">
+                            <label for="inputState"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Atendido:</font></font></label>
+                            <select formControlName="atendido" name="atendido" class="form-control" style="height: 30px;" (change)="empleadoSeleccionado( $event.target.value )" required>
+                            <option selected><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Seleccionar</font></font></option>
+                            <option *ngFor="let empleado of empleadosService.empleados"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> {{ empleado.nombre }} </font></font></option>
+                        </select>
+                        </div>
+                        <div class="form-group col-md-12 control">
+                            <label for="exampleFormControlInput1">Paciente:</label>
+                            <input #sinregistrar formControlName="sinregistrar" name="sinregistrar" type="text" class="form-control" style="height: 28px;" (input)="buscarPacientes(sinregistrar.value)" placeholder="Nombre paciente no registrado o evento">
+                            <select #paciente formControlName="paciente" name="paciente" multiple class="form-control mt-1" style="height: 90px;">
+                            <option *ngFor="let paciente of usuarios; let idx = index" (click)="usuarioSeleccionado(paciente)"> {{ paciente.nombre }} {{ paciente.apellidos }} </option>
+                        </select>
+
+                        </div>
+                        <div class="form-group col-md-12 control input-dia">
+
+                            <mat-form-field>
+                                <input matInput #dia formControlName="dia" name="dia" [matDatepicker]="picker3" placeholder="Día" [value]="date">
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker3></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="row row-horas">
+
+                            <div class="form-group col-md-6 control">
+                                <mat-form-field>
+                                    <mat-label>Hora inicio:</mat-label>
+                                    <mat-select formControlName="inicio" name="inicio" [(value)]="selectInit">
+                                        <mat-option value="option1">--:--</mat-option>
+                                        <mat-option value="{{hora}}" *ngFor="let hora of horas"> {{ hora }} </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+
+                            <div class="form-group col-md-6 control">
+                                <mat-form-field>
+                                    <mat-label>Hora fin:</mat-label>
+                                    <mat-select formControlName="final" name="final" [(value)]="selectFin">
+                                        <mat-option value="option1">--:--</mat-option>
+                                        <mat-option value="{{hora}}" *ngFor="let hora of horas"> {{ hora }} </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-group control">
+                            <label for="exampleInputEmail1">Color</label>
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <ul class="icolors">
+                                        <div *ngFor="let color of colores; let i = index">
+                                            <li [ngStyle]="{background: colores[i]}" class="square pointer" (click)="selecColor(i)">
+                                                <i *ngIf="i === colorIdx" class="mdi mdi-check"></i>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">
+                                <span  *ngIf="!actualizarCita">Guardar Cita</span>
+                                <span  *ngIf="actualizarCita">Actualizar Cita</span>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="dispositivo==='Mobile'" class="modal" style="display: block;" tabindex="-1" role="dialog">
+        <div class="modal-dialog mt-2" role="document">
+            <div #modal class="modal-content">
+                <div class="modal-header" [ngClass]="{'bg-megna': !actualizarCita, 'bg-inverse text-white': actualizarCita}">
+                    <h5 class="modal-title" *ngIf="!actualizarCita" id="exampleModalCenterTitle">Nueva Cita</h5>
+                    <h5 class="text-white" *ngIf="actualizarCita">Actualizar Cita</h5>
+                    <button (click)="cerrarModal()" type="button" class="close pointer text-white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="guardarCita()">
+                        <div class="form-group col-md-12 control">
+                            <label for="inputState"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Atendido:</font></font></label>
+                            <select formControlName="atendido" name="atendido" class="form-control" style="height: 30px;" (change)="empleadoSeleccionado( $event.target.value )" required>
+                            <option selected><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Seleccionar</font></font></option>
+                            <option *ngFor="let empleado of empleadosService.empleados"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> {{ empleado.nombre }} </font></font></option>
+                        </select>
+                            <small class="alert-danger" *ngIf="forma.value.atendido === null && forma.touched">Selecciona un nombre</small>
+                        </div>
+                        <div class="form-group col-md-12 control">
+                            <label for="exampleFormControlInput1">Paciente o evento:</label>
+                            <input #sinregistrar formControlName="sinregistrar" name="sinregistrar" type="text" class="form-control" style="height: 28px;" (input)="buscarPacientes(sinregistrar.value)" placeholder="Paciente sin registrado o evento">
+                            <mat-form-field>
+                                <mat-label>Paciente:</mat-label>
+                                <mat-select #paciente formControlName="paciente" name="paciente" [(value)]="inputPaciente">
+                                    <mat-option value="option1">--:--</mat-option>
+                                    <mat-option value="{{idx}}" *ngFor="let paciente of usuarios; let idx = index" (click)="usuarioSeleccionado(paciente)">{{ paciente.nombre }} {{ paciente.apellidos }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group col-md-12 control input-dia">
+
+                            <mat-form-field>
+                                <input matInput #dia formControlName="dia" name="dia" [matDatepicker]="picker3" placeholder="Día" [value]="date">
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker3></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="row row-horas">
+
+                            <div class="form-group col-md-6 control">
+                                <mat-form-field>
+                                    <mat-label>Hora inicio:</mat-label>
+                                    <mat-select formControlName="inicio" name="inicio" [(value)]="selectInit">
+                                        <mat-option value="option1">--:--</mat-option>
+                                        <mat-option value="{{hora}}" *ngFor="let hora of horas"> {{ hora }} </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group col-md-6 control">
+                                <mat-form-field>
+                                    <mat-label>Hora fin:</mat-label>
+                                    <mat-select formControlName="final" name="final" [(value)]="selectFin">
+                                        <mat-option value="option1">--:--</mat-option>
+                                        <mat-option value="{{hora}}" *ngFor="let hora of horas"> {{ hora }} </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-group control">
+                            <label for="exampleInputEmail1">Color</label>
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <ul class="icolors">
+                                        <div *ngFor="let color of colores; let i = index">
+                                            <li [ngStyle]="{background: colores[i]}" class="square pointer" (click)="selecColor(i)">
+                                                <i *ngIf="i === colorIdx" class="mdi mdi-check"></i>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">
+                                <span  *ngIf="!actualizarCita">Guardar Cita</span>
+                                <span  *ngIf="actualizarCita">Actualizar Cita</span>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

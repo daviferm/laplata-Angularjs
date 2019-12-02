@@ -1,0 +1,148 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<!-- Row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Formulario de registro</h4>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="forma" (ngSubmit)="registrarUsuario()">
+                    <div class="form-body">
+                        <h3 class="card-title">Información personal</h3>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group" [ngClass]="{'has-danger': !forma.controls['nombre'].valid && forma.controls['nombre'].touched}">
+                                    <label class="control-label">Nombre</label>
+                                    <input formControlName="nombre" name="nombre" type="text" id="firstName" class="form-control" placeholder="Nombre">
+                                    <div *ngIf="forma.get('nombre').errors && forma.get('nombre').touched" class="form-control-feedback">
+                                        <small>El nombre es necesario.</small>
+                                    </div>
+                                    <!-- <small class="form-control-feedback"> Nombre del paciente </small> -->
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group" [ngClass]="{'has-danger': !forma.controls['apellidos'].valid && forma.controls['apellidos'].touched}">
+                                    <label class="control-label">Apellicos</label>
+                                    <input formControlName="apellidos" name="apellidos" type="text" id="lastName" class="form-control" placeholder="Apellicos">
+                                    <div *ngIf="forma.get('apellidos').errors && forma.get('apellidos').touched" class="form-control-feedback">
+                                        <small>Es necesarios un apellido por lo menos.</small>
+                                    </div>
+                                    <!-- <small class="form-control-feedback">Es necesario un apellido </small> -->
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" [ngClass]="{'has-danger': !forma.controls['genero'].valid && forma.controls['genero'].touched}">
+                                    <!-- <label class="control-label">Género</label> -->
+                                    <!-- class="has-danger" cuando es incorrecto -->
+                                    <!-- class="has-success" cuando es correcto -->
+                                    <mat-form-field class="date-ncm">
+                                        <mat-label>Género</mat-label>
+                                        <mat-select formControlName="genero" name="genero">
+                                            <mat-option>None</mat-option>
+                                            <mat-option value="Hombre">Hombre</mat-option>
+                                            <mat-option value="Mujer">Mujer</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <!-- <select formControlName="genero" name="genero" class="form-control custom-select">
+                                        <option value="Hombre">Hombre</option>
+                                        <option value="Mujer">Mujer</option>
+                                    </select> -->
+                                    <small *ngIf="forma.get('genero').errors && forma.get('genero').touched" class="form-control-feedback"> Selecciona el género </small> </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group" [ngClass]="{'has-danger': !forma.controls['nacimiento'].valid && forma.controls['nacimiento'].touched}">
+                                    <mat-form-field class="date-ncm">
+                                        <input matInput #dia formControlName="nacimiento" name="nacimiento" [matDatepicker]="picker3" placeholder="dd/mm/yyyy">
+                                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker3></mat-datepicker>
+                                    </mat-form-field>
+                                    <!-- <label class="control-label">Fecha de nacimiento</label> -->
+                                    <!-- <input formControlName="nacimiento" name="nacimiento" type="date" class="form-control" placeholder="dd/mm/yyyy"> -->
+                                    <small *ngIf="forma.get('nacimiento').errors && forma.get('nacimiento').touched" class="form-control-feedback">La fecha de nacimiento es necesaria </small>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" [ngClass]="{'has-danger': !forma.controls['email'].valid && forma.controls['email'].touched}">
+                                    <label class="control-label">Email</label>
+                                    <input formControlName="email" name="email" type="text" id="lastName" class="form-control" placeholder="Correo electrónico">
+                                    <small *ngIf="forma.get('email').errors && forma.get('email').touched" class="form-control-feedback">El correo es necesario </small>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group" [ngClass]="{'has-danger': !forma.controls['telefono'].valid && forma.controls['telefono'].touched}">
+                                    <label class="control-label">Teléfono</label>
+                                    <input formControlName="telefono" name="telefono" type="tel" id="lastName" class="form-control" placeholder="Teléfono">
+                                    <small *ngIf="forma.get('telefono').errors && forma.get('telefono').touched" class="form-control-feedback">Teléfono del paciente </small>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <h3 class="box-title m-t-40">Dirección</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label>Calle</label>
+                                    <input formControlName="direccion" name="direccion" type="text" class="form-control" placeholder="Calle y número">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ciudad</label>
+                                    <input formControlName="ciudad" name="ciudad" type="text" class="form-control" placeholder="Ciudad">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Provincia</label>
+                                    <input formControlName="provincia" name="provincia" type="text" class="form-control" placeholder="Provincia">
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Código Postal</label>
+                                    <input formControlName="codigoPostal" name="codigoPostal" type="text" class="form-control" placeholder="Códico Postal">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Observaciones:</label>
+                                    <textarea class="form-control" formControlName="observaciones" name="observaciones" id="exampleFormControlTextarea1" rows="3" placeholder="Observaciones médicas..."></textarea>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-outline-info mr-3"> <i class="fa fa-save mr-2"></i>Guardar</button>
+                        <button type="button" class="btn btn-outline-inverse">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

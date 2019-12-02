@@ -1,0 +1,82 @@
+.card-user {
+    width: 98%;
+    max-width: 900px;
+    margin: 0px auto;
+}
+
+.w-img {
+    width: 70px;
+}
+
+.personales {
+    font-size: 1em;
+}
+
+p {
+    margin: 2px 0px;
+    color: black;
+}
+
+.prop {
+    font-weight: 600;
+}
+
+.span-medico {
+    padding: .3em;
+    font-size: .8em;
+}
+
+.cell-row,
+.cell-name {
+    font-size: .7em;
+    color: black;
+}
+
+
+/* Spinner */
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 100px auto;
+    background-color: #333;
+    border-radius: 100%;
+    -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+    animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+    0% {
+        -webkit-transform: scale(0)
+    }
+    100% {
+        -webkit-transform: scale(1.0);
+        opacity: 0;
+    }
+}
+
+@keyframes sk-scaleout {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    100% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+        opacity: 0;
+    }
+}
+
+
+/* Spinner */
+
+@media screen and (min-width: 480px) {
+    .span-medico {
+        padding: .3em;
+        font-size: 1.2em;
+    }
+    .cell-row,
+    .cell-name {
+        font-size: 1em;
+    }
+}

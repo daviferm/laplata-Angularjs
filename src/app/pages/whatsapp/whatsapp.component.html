@@ -1,0 +1,78 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div #card class="card-body">
+                <header>
+                    <div class="btn-flechas">
+                        <h3 class="card-title">
+                            Citas registradas
+                            <span class="badge badge-pill badge-primary">{{ totalCitas }}</span>
+                        </h3>
+                        <div class="btn-direction">
+                            <button #btnleft [disabled]="btnDisabled" class="btn-lefth" (click)="cambiarDia(-1)">
+                                <i class="icon-arrow-left"></i>
+                            </button>
+                            <button class="btn-rigth" (click)="cambiarDia(+1)">
+                                <i class="icon-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h4> {{ semana[fecha.getDay()] }}, {{ fecha.getDate() }} de {{ meses[fecha.getMonth()] }} de {{ fecha.getFullYear() }} </h4>
+                    </div>
+
+                </header>
+                <div *ngFor="let fisio of empleados">
+                    <h3 *ngIf="citasDB && citasDB.length != 0"><span class="badge badge-pill badge-info">Citas {{ fisio.nombre }}</span></h3>
+                    <div *ngFor="let cita of citasDB; let i = index">
+
+                        <div *ngIf="fisio.nombre === cita.medicoId.nombre">
+                            <table class="table">
+                                <thead>
+                                    <tr *ngIf="!alertCitas">
+                                        <th class="cell-img">Imagen</th>
+                                        <th class="cell-name">Nombre</th>
+                                        <th class="cell-name">Horario</th>
+                                        <th class="cell-name">Teléfono</th>
+                                        <th class="cell-name">Enviar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="fila">
+                                        <td class="cell-img">
+                                            <img [src]="cita.pacienteId.img | imagen" class="w-img">
+                                        </td>
+                                        <td class="cell-row">
+                                            <div>
+                                                {{ cita.pacienteId.nombre }}
+                                            </div>
+                                        </td>
+                                        <td class="cell-row"> {{ cita.inicio }} - {{ cita.final }} </td>
+                                        <td class="cell-row"> {{ cita.pacienteId.telefono }} </td>
+                                        <td>
+                                            <button type="button" class="btn btn-success bth-whatsapp" (click)="checkedSms(i)">
+                                                <a class="link-whatsapp"> 
+                                                    <i class="fa fa-whatsapp"></i>
+                                                    <i *ngIf="whatsappSend.checked[i].check" id="check" class="fa fa-check color-black"></i>
+                                                </a>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn col-md-12" *ngIf="citasDB && citasDB.length === 0">
+
+    <div class="alert alert-info text-center col-md-12" role="alert">
+        <strong>No hay citas pendientes</strong>
+    </div>
+</div>

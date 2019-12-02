@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: -20px;
+}
+
+.navbar .nav-fecha {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    flex-basis: 80%;
+}
+
+.navbar .nav-fecha .fech {
+    flex-basis: 60%;
+    text-align: center;
+}
+
+.navbar .nav-fecha .btn-direction {
+    flex-basis: 40%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    border: 0px solid black;
+}
+
+.navbar .nav-fecha .btn-direction .btn-lefth,
+.navbar .nav-fecha .btn-direction .btn-rigth {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navbar .nav-fecha .btn-direction .btn-lefth:hover,
+.navbar .nav-fecha .btn-direction .btn-rigth:hover {
+    background-color: rgb(230, 226, 226);
+}
+
+.navbar i {
+    font-size: 1.2em;
+}
+
+.navbar .btn-lefth i {
+    margin-left: -2px;
+}
+
+.navbar .btn-rigth i {
+    margin-left: 2px;
+}
+
+.navbar .btn-hoy {
+    flex-basis: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.navbar .botones {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 8px 0px;
+}
+
+.active {
+    background: #868e96;
+    color: white;
+}
+
+.calendario {
+    margin-top: 15px;
+    overflow-y: scroll;
+}
+
+@media screen and (min-width: 700px) {
+    .navbar .botones {
+        flex-basis: 20%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 0px;
+    }
+    .navbar {
+        height: 50px;
+    }
+    .navbar .nav-fecha {
+        flex-basis: 55%;
+    }
+    .navbar .nav-fecha .btn-direction {
+        flex-basis: 20%;
+    }
+}

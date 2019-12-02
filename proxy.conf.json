@@ -1,0 +1,7 @@
+{
+    "/catalogo/dataset/*": {
+        "target": "http://datos.comunidad.madrid",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

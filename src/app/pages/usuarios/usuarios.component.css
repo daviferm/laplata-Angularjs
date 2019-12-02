@@ -1,0 +1,63 @@
+.cell-email {
+    display: none;
+}
+
+.cell-row,
+.cell-name {
+    font-size: .8em;
+}
+
+.w-img img {
+    border-radius: 50%;
+    width: 35px;
+}
+
+.btn-user {
+    font-size: .8em;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+.btn-user i {
+    margin-left: -4px;
+}
+
+.example-viewport {
+    height: 500px;
+    width: 100%;
+}
+
+
+/* Propiedad de página de médicos */
+
+.square {
+    width: 20px;
+    height: 20px;
+}
+
+@media screen and (min-width: 700px) {
+    .cell-email {
+        display: block;
+    }
+    .cell-row,
+    .cell-name {
+        font-size: 1em;
+    }
+    .w-img img {
+        width: 70px;
+    }
+    .btn-user {
+        font-size: 1em;
+        border-radius: 6px;
+        width: 40px;
+        height: 40px;
+    }
+    .btn-user i {
+        margin-left: 0px;
+    }
+    .square {
+        width: 25px;
+        height: 25px;
+    }
+}

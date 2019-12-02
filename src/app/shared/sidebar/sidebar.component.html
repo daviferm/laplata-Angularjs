@@ -1,0 +1,60 @@
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="user-profile">
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"> <i class="mdi mdi-menu"></i> <span class="hide-menu">Menú </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a routerLinkActive="active" [routerLink]="['/calendario/undefined/undefined/undefined']">Calendario</a></li>
+                        <li><a routerLinkActive="active" [routerLink]="['/pacientes']">Pacientes </a></li>
+                        <li>
+                            <a routerLinkActive="active" [routerLink]="['/nuevopaciente']">
+                                <i class="fa fa-plus"></i> Crear Paciente</a>
+                        </li>
+                        <li><a routerLinkActive="active" [routerLink]="['/ajustes']">Ajustes</a></li>
+                        <li><a class="pointer" (click)="desconectar()">Salir</a></li>
+                    </ul>
+                </li>
+                <li class="nav-devider"></li>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-user-circle"></i><span class="hide-menu">PERSONAL <span class="label label-rouded label-themecolor pull-right">{{ medicos.length }} </span></span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <div *ngIf="medicos.length > 0" #lista>
+                            <li class="list-medicos" *ngFor="let medico of medicos; let i = index">
+                                <input #check (click)="checeMedico( medico, check )" type="checkbox" id="{{medico.nombre + i}}" class="filled-in chk-col-teal">
+                                <label for="{{medico.nombre + i}}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ medico.nombre }} </font></font></label>
+                                <div class="bg-color" [ngStyle]="{'background': medico.color}"></div>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu">Calendario </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            <app-minicalendar></app-minicalendar>
+                        </li>
+                    </ul>
+                </li>
+                <li> <a class="waves-effect waves-dark" href="#"><i class="fa fa-plus-square-o"></i>
+                    <span class="hide-menu">
+                        <button (click)="citaService.mostrarModal()" class="btn btn-outline-info small waves-effect waves-light label-themecolor mt-4 ml-2" type="button">
+                            <span class="btn-label">
+                                <i class="fa fa-plus btn-cita"></i>
+                            </span> <strong class="btn-cita">Crear</strong> 
+                        </button>
+                    </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

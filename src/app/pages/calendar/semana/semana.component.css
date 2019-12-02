@@ -1,0 +1,379 @@
+.content-calendar {
+    --linea-tb: rgb(198, 200, 205);
+}
+
+.content-calendar {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.content-calendar .calendar {
+    width: 100%;
+    height: 98%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    overflow: hidden;
+    padding-bottom: 1em;
+}
+
+.content-calendar .calendar .header {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.content-calendar .calendar .header .horas {
+    width: 5%;
+    min-width: 38px;
+}
+
+.content-calendar .calendar .header .semana {
+    position: relative;
+    width: 95%;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    border-bottom: 1px solid var(--linea-tb);
+}
+
+.content-calendar .calendar .header .fin-semana {
+    position: relative;
+    width: 15%;
+    display: grid;
+    grid-template-columns: repeat(5, 50%);
+    border-bottom: 1px solid var(--linea-tb);
+}
+
+.content-calendar .calendar .header .dia-semana,
+.content-calendar .calendar .header .dia-fin-semana {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: .8em;
+}
+
+.content-calendar .calendar .header .dia-semana:before,
+.content-calendar .calendar .header .dia-fin-semana:before {
+    content: "";
+    position: relative;
+    top: 100%;
+    left: 0px;
+    width: 1px;
+    height: 20px;
+    background: var(--linea-tb);
+    margin-top: -20px;
+}
+
+.content-calendar .calendar .header .dia-semana div:nth-child(1),
+.content-calendar .calendar .header .dia-fin-semana div:nth-child(1) {
+    height: 20px;
+}
+
+.content-calendar .calendar .header .dia-semana div:nth-child(2),
+.content-calendar .calendar .header .dia-fin-semana div:nth-child(2) {
+    width: 50px;
+    height: 50px;
+    margin: 0px auto 15px auto;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.content-calendar .calendar .header .dia-semana div:nth-child(2) p,
+.content-calendar .calendar .header .dia-fin-semana div:nth-child(2) p {
+    font-size: 1.4em;
+    margin: 0px auto;
+    margin-top: 10px;
+    text-align: center;
+    display: block;
+}
+
+.number-dia {
+    border-radius: 50%;
+    margin: 0px;
+}
+
+.number-dia:hover {
+    background-color: rgb(230, 224, 224);
+}
+
+.content-calendar .calendar .colum-dia {
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.content-calendar .calendar .colum-dia .columna-horas {
+    width: 5%;
+    min-width: 38px;
+}
+
+.content-calendar .calendar .colum-dia .columna-horas .horas {
+    width: 100%;
+    height: 40px;
+    border: 1px solid var(--linea-tb);
+    border-left: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.content-calendar .calendar .colum-dia .columna-horas .horas p {
+    margin: 0px;
+    margin-left: 4px;
+    font-size: .6em;
+    font-weight: 500;
+    background: #f4f6f9;
+    z-index: 1000;
+}
+
+.content-calendar .calendar .colum-dia .columna-horas .horas>div {
+    display: inline-block;
+    width: 80%;
+    transform: translateY(-6px);
+    background: #f4f6f9;
+}
+
+.content-calendar .calendar .colum-dia .dias {
+    width: 95%;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+}
+
+.content-calendar .calendar .colum-dia .dias .columna-celdas .celdas,
+.content-calendar .calendar .colum-dia .dias-fin-semana .columna-fin-semana .celdas-fin-semana {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border-right: 1px solid var(--linea-tb);
+    border-bottom: 1px solid var(--linea-tb);
+    cursor: pointer;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.content-calendar .calendar .header .fin-semana,
+.content-calendar .calendar .colum-dia .dias-fin-semana {
+    display: none;
+}
+
+.dia-selected {
+    background-color: rgb(100, 172, 120);
+    border-radius: 50%;
+    color: whitesmoke;
+    font-weight: bolder;
+}
+
+.dia-actual {
+    background-color: rgba(26, 115, 232, 1.00);
+    border-radius: 50%;
+    color: whitesmoke;
+    font-weight: bolder;
+}
+
+.festivo {
+    width: 100%;
+}
+
+.nom-festivo {
+    color: rgb(105, 12, 12);
+    font-weight: 400;
+}
+
+.span-festivo {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size: .8em;
+    width: 90%;
+    padding: .4em 0;
+    margin: 0;
+    margin-left: 5%;
+}
+
+
+/* Clases de citas */
+
+.new-cita {
+    position: relative;
+    font-size: .7em;
+    color: whitesmoke;
+    text-align: center;
+    z-index: 1;
+    border-radius: 4px;
+    border: 1px solid white;
+    overflow: visible;
+    height: 100%;
+    width: 40%;
+}
+
+.tooltips {
+    position: relative;
+    height: 120px;
+    width: 190px;
+    min-width: 150px;
+    border-radius: 4px;
+    background: rgb(246, 247, 245);
+    box-shadow: 2px 2px 8px gray;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    color: black;
+    animation: .4s mostra 1;
+    display: none;
+}
+
+@keyframes mostra {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.div-superior {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    padding: 4px 0;
+    flex-basis: 30%;
+}
+
+.div-inferior {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+}
+
+.div-inferior p {
+    display: block;
+    width: 100%;
+    margin: 3px 0px;
+    font-size: 1em;
+}
+
+.texto-popup {
+    font-size: .6em;
+}
+
+.div-celda {
+    position: absolute;
+    background: orange;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.body-icon {
+    position: relative;
+    top: 2px;
+    width: 30%;
+    height: 20px;
+    border: 0px solid black;
+    background: transparent;
+    z-index: 100;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa {
+    font-size: 1.5em;
+}
+
+.top00 {
+    top: 0%;
+}
+
+.top15 {
+    top: 25%;
+}
+
+.top30 {
+    top: 50%;
+}
+
+.top45 {
+    top: 75%;
+}
+
+.spinner-datos {
+    position: absolute;
+    width: 80%;
+    top: 30%;
+    left: 10%;
+    z-index: 99999;
+}
+
+.spinner-datos i {
+    font-size: 3em;
+}
+
+@media screen and ( min-width: 480px) {
+    .tooltips {
+        width: 280px;
+    }
+    .div-inferior p {
+        font-size: 1.2em;
+    }
+    .content-calendar .calendar .header .horas {
+        min-width: 40px;
+    }
+    .content-calendar .calendar .colum-dia .columna-horas .horas p {
+        font-size: .6em;
+        font-weight: 600;
+    }
+    .content-calendar .calendar .colum-dia .columna-horas .horas>div {
+        transform: translateY(-10px);
+    }
+    .content-calendar .calendar .colum-dia .columna-horas {
+        width: 5%;
+        min-width: 40px;
+    }
+}
+
+@media screen and ( min-width: 760px) {
+    .content-calendar .calendar .header .horas {
+        width: 3%;
+    }
+    .content-calendar .calendar .colum-dia .columna-horas .horas p {
+        font-size: .6em;
+        font-weight: 600;
+    }
+    .content-calendar .calendar .colum-dia .columna-horas .horas>div {
+        transform: translateY(-6px);
+    }
+    .content-calendar .calendar .colum-dia .columna-horas {
+        width: 3%;
+    }
+    .content-calendar .calendar .header .fin-semana,
+    .content-calendar .calendar .colum-dia .dias-fin-semana {
+        width: 15%;
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+    }
+    .content-calendar .calendar .header .semana {
+        width: 80%;
+    }
+    .content-calendar .calendar .colum-dia .dias {
+        width: 80%;
+        display: grid;
+        grid-template-columns: repeat(5, 20%);
+    }
+}
